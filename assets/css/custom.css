@@ -1,3 +1,9 @@
 span {
     color: rgb(0, 150, 244) !important;
 }
+
+.main-content{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}

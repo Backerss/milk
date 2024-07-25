@@ -2,33 +2,7 @@
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
-
-  <title>Tale SEO Agency CSS Template by TemplateMo website</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-  <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/templatemo-tale-seo-agency.css">
-  <link rel="stylesheet" href="assets/css/owl.css">
-  <link rel="stylesheet" href="assets/css/animate.css">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="assets/css/custom.css">
-  <!--
-
-TemplateMo 582 Tale SEO Agency
-
-https://templatemo.com/tm-582-tale-seo-agency
-
--->
+    <?php include("include/include_header.php") ?>
 </head>
 
 <body>
@@ -86,20 +60,7 @@ https://templatemo.com/tm-582-tale-seo-agency
             </a>
             <!-- ***** สิ้นสุดโลโก้ ***** -->
             <!-- ***** เริ่มเมนู ***** -->
-            <ul class="nav">
-              <li class="scroll-to-section"><a href="#top" class="active">หน้าแรก</a></li>
-              <li class="scroll-to-section"><a href="#services">บริการ</a></li>
-              <li class="scroll-to-section"><a href="#projects">โครงการ</a></li>
-              <li class="has-sub">
-                <a href="javascript:void(0)">หน้าอื่น ๆ</a>
-                <ul class="sub-menu">
-                  <li><a href="about.html">เกี่ยวกับเรา</a></li>
-                  <li><a href="faqs.html">คำถามที่พบบ่อย</a></li>
-                </ul>
-              </li>
-              <li class="scroll-to-section"><a href="#infos">ข้อมูล</a></li>
-              <li class="scroll-to-section"><a href="#contact">ติดต่อ</a></li>
-            </ul>
+            <?php include("nav_bar.php") ?>
             <a class='menu-trigger'>
               <span>เมนู</span>
             </a>
@@ -374,29 +335,13 @@ https://templatemo.com/tm-582-tale-seo-agency
   </div>
 
   <footer>
-    <div class="container">
-      <div class="col-lg-12">
-        <p>ลิขสิทธิ์ © 2036 <a href="#">Tale SEO Agency</a>. สงวนลิขสิทธิ์ทั้งหมด.
-
-          <br>ออกแบบ: <a href="https://templatemo.com" target="_blank">TemplateMo</a> การกระจาย: <a
-            href="https://themewagon.com">ThemeWagon</a>
-        </p>
-      </div>
-    </div>
+    <?php include("include/include_footer.php") ?>
   </footer>
 
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
-
+  <?php include("include/include_script.php") ?>
 
 </body>
 
