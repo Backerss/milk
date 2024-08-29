@@ -72,7 +72,7 @@
     <div class="container main-content">
         <div class="row">
             <div class="col-lg-5">
-                <h1>Hello lorem</h1>
+                <h1>Hello พี่เจี่ย</h1>
             </div>
         </div>
     </div>
