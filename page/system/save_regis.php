@@ -1,73 +1,35 @@
 <?php
 
-    $localhost = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cdte_65_1";
-    $conn = new mysqli($localhost, $username, $password, $database);
-    $conn->set_charset("utf8");
-    if($conn->connect_error){
-        die("Connection failed: ".$conn->connect_error);
+    include '../../data/db.php';
+    $response = [];
+
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+
+    if($firstname == "" || $lastname == "" || $email == "" || $password == ""){
+        $response['status'] = 'error';
+        $response['message'] = 'กรุณากรอกข้อมูลให้ครบถ้วน';
+        echo json_encode($response);
     }
 
+    $check_mail = selectData($conn, "SELECT * FROM users WHERE users_mail = '$email'");
 
-    $users_prefix = $_POST['user_prefix'];
-    $users_name = $_POST['user_name'];
-    $users_lastname = $_POST['user_lastname'];
-    $users_mail = $_POST['user_mail'];
-    $users_password = $_POST['user_password'];
-    $users_date = $_POST['user_birthday'];
-    $users_sex = $_POST['user_sex'];
-    $users_code = $_POST['user_ids'];
-    $users_phone = $_POST['user_tel'];
-    $users_add = $_POST['user_address'];
-
-    function get_data($conn,$sql){
-        $result = $conn->query($sql);
-        $all = [];
-        while($row = $result->fetch_assoc()) {
-       $all[] = $row;
-       }
-       return $all;
+    if ($check_mail && $check_mail->num_rows > 0) {
+        $response['status'] = 'error';
+        $response['message'] = 'มีอีเมลนี้ในระบบแล้ว';
+    } else {
+        // ในที่นี้ให้เพิ่มโค้ดสำหรับการ insert ข้อมูลหากต้องการ
+        $response['status'] = 'success';
+        $response['message'] = 'สมัครสมาชิกสำเร็จ';
+    }
     
-    }
-
-    $check_mail = "SELECT users_mail FROM users WHERE users_mail = '$users_mail'";
-    $check_mail_result = $conn->query($check_mail);
-    if($check_mail_result->num_rows > 0){
-        echo "<script>
-        alert('มีอีเมลนี้ในระบบแล้ว');
-        window.history.back();
-
-      </script>";
-      exit();
-    }
-
-
-    $hash_pasword = password_hash($users_password, PASSWORD_BCRYPT);
-    $sql = "INSERT INTO users (users_prefix,
-    users_name, users_lastname, users_mail,
-    users_password, users_date, users_sex,
-    users_code, users_phone, users_add, users_regis) VALUES ('$users_prefix',
-    '$users_name', '$users_lastname', '$users_mail',
-    '$hash_pasword', '$users_date', '$users_sex',
-    '$users_code', '$users_phone', '$users_add', NOW())";
-
-    echo $hash_pasword;
-
-
-    if($conn->query($sql) === TRUE){
-        echo "<script>
-        alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-      </script>";
+    // ส่งผลลัพธ์กลับไปในรูปแบบ JSON
+    
+    echo json_encode($response);
+    
 
     
-    }else{
-        echo "ควายบันทึกไม่ได้หรอก แบร่ๆๆๆ";
-    }
-
-
-
-
-
 ?>

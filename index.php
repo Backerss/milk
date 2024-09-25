@@ -60,7 +60,7 @@
             </a>
             <!-- ***** สิ้นสุดโลโก้ ***** -->
             <!-- ***** เริ่มเมนู ***** -->
-            <?php include("nav_bar.php") ?>
+            <?php include("include/nav_bar.php") ?>
             <a class='menu-trigger'>
               <span>เมนู</span>
             </a>
