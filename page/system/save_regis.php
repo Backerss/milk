@@ -1,4 +1,16 @@
-<?php    
+<?php
+
+    $localhost = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "cdte_65_1";
+    $conn = new mysqli($localhost, $username, $password, $database);
+    $conn->set_charset("utf8");
+    if($conn->connect_error){
+        die("Connection failed: ".$conn->connect_error);
+    }
+
+
     $users_prefix = $_POST['user_prefix'];
     $users_name = $_POST['user_name'];
     $users_lastname = $_POST['user_lastname'];
@@ -10,17 +22,29 @@
     $users_phone = $_POST['user_tel'];
     $users_add = $_POST['user_address'];
 
-    $hash_pasword = password_hash($users_password, PASSWORD_BCRYPT);
-    $localhost = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cdte_65_1";
-    $conn = new mysqli($localhost, $username, $password, $database);
-    $conn->set_charset("utf8");
-    if($conn->connect_error){
-        die("Connection failed: ".$conn->connect_error);
+    function get_data($conn,$sql){
+        $result = $conn->query($sql);
+        $all = [];
+        while($row = $result->fetch_assoc()) {
+       $all[] = $row;
+       }
+       return $all;
+    
     }
 
+    $check_mail = "SELECT users_mail FROM users WHERE users_mail = '$users_mail'";
+    $check_mail_result = $conn->query($check_mail);
+    if($check_mail_result->num_rows > 0){
+        echo "<script>
+        alert('มีอีเมลนี้ในระบบแล้ว');
+        window.history.back();
+
+      </script>";
+      exit();
+    }
+
+
+    $hash_pasword = password_hash($users_password, PASSWORD_BCRYPT);
     $sql = "INSERT INTO users (users_prefix,
     users_name, users_lastname, users_mail,
     users_password, users_date, users_sex,
