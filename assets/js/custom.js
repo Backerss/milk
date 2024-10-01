@@ -277,6 +277,7 @@
         });
     }
 
+	console.log('hello');
 
 	
 

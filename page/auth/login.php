@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../assets/css/login.css">
     <title>Document</title>
 </head>
@@ -14,7 +14,7 @@
       <div class="forms-container">
         <div class="signin-signup">
 
-          <form action="#" class="sign-in-form">
+          <form class="sign-in-form">
             <h2 class="title">เข้าสู่ระบบ</h2>
             <div class="input-field">
                <i class="fa-solid fa-envelope"></i>
@@ -24,7 +24,7 @@
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="Password" name="user_password" />
             </div>
-            <input type="submit" value="Login" class="btn solid" />
+            <button id="submit-login" class="btn solid">เข้าสู่ระบบ</button>
           </form>
 
           <form class="sign-up-form">
@@ -46,7 +46,7 @@
               <i class="fas fa-lock"></i>
               <input type="password" name="password" placeholder="Password" />
             </div>
-            <a type="submit" id="submit-register" class="btn btn-primary"></a>
+            <button id="submit-register" class="btn btn-primary">สมัครสมาชิก</button>
           </form>
 
         </div>
@@ -63,7 +63,7 @@
               Sign up
             </button>
           </div>
-          <img src="img/log.svg" class="image" alt="" />
+          <img src="" class="image" alt="" />
         </div>
         <div class="panel right-panel">
           <div class="content">
@@ -76,7 +76,7 @@
               Sign in
             </button>
           </div>
-          <img src="img/register.svg" class="image" alt="" />
+          <img src="" class="image" alt="" />
         </div>
       </div>
     </div>
@@ -92,33 +92,84 @@
 
 <script>
   $(document).ready(function() {
-            $('#submit-register').on('click', function(event) {
-                event.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
-                console.log($(this).serialize());
+    $('#submit-register').on('click', function(event) {
+    event.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
                 
-                $.ajax({
-                    url: '../system/save_regis.php', // เปลี่ยนเป็น path ของไฟล์ PHP
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    success: function(response) {
-                        // แสดง SweetAlert ตามผลลัพธ์ที่ได้รับ
-                        Swal.fire({
-                            icon: response.status === 'success' ? 'success' : 'error',
-                            title: response.message,
-                            showConfirmButton: true
-                        });
-                    },
-                    error: function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'เกิดข้อผิดพลาดในการสมัครสมาชิก',
-                            showConfirmButton: true
-                        });
-                    }
-                });
+    $.ajax({
+        url: '../system/save_regis.php', // เปลี่ยนเป็น path ของไฟล์ PHP
+        type: 'POST',
+        data: {
+        firstname: $('input[name="firstname"]').val(),
+        lastname: $('input[name="lastname"]').val(),
+        email: $('input[name="email"]').val(),
+        password: $('input[name="password"]').val()
+        },
+        dataType: 'json',
+        success: function(response) {
+        // แสดง SweetAlert ตามผลลัพธ์ที่ได้รับ
+            Swal.fire({
+              icon: response.status === 'success' ? 'success' : 'error',
+              title: response.message,
+              showConfirmButton: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                if (response.status === 'success') {
+                  $('.container--').removeClass('sign-up-mode');
+                  //clear content at input
+                  $('input[name="firstname"]').val('');
+                  $('input[name="lastname"]').val('');
+                  $('input[name="email"]').val('');
+                  $('input[name="password"]').val('');
+              
+              }
+            }
             });
+        },
+        error: function(err) {
+        Swal.fire({
+        icon: 'error',
+        title: 'เกิดข้อผิดพลาดในการสมัครสมาชิก',
+        showConfirmButton: true
         });
+        }
+        });
+    });
+  });
+
+  $(document).ready(function() {
+    $('#submit-login').on('click', function(event) {
+    event.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
+                
+    $.ajax({
+        url: '../system/check_login.php', // เปลี่ยนเป็น path ของไฟล์ PHP
+        type: 'POST',
+        data: {
+        user_email: $('input[name="user_email"]').val(),
+        user_password: $('input[name="user_password"]').val()
+        },
+        dataType: 'json',
+        success: function(response) {
+        // แสดง SweetAlert ตามผลลัพธ์ที่ได้รับ
+            Swal.fire({
+            icon: response.status === 'success' ? 'success' : 'error',
+            title: response.message,
+            showConfirmButton: true
+        });
+        },
+        error: function(err) {
+          Swal.fire({
+          icon: 'error',
+          title: 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ',
+          showConfirmButton: true
+          });
+
+          console.log(err);
+        }
+        });
+    });
+  });
+
+
 </script>
 
 </html>
