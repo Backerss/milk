@@ -27,7 +27,7 @@
         $password = password_hash($password, PASSWORD_DEFAULT);
 
 
-        $Adduser = insertData($conn, "INSERT INTO users (	users_name, users_lastname, users_mail, users_password) VALUES ('$firstname', '$lastname', '$email', '$password')");
+        $Adduser = insertData($conn, "INSERT INTO users (	users_name, users_lastname, users_mail, users_password, users_regis) VALUES ('$firstname', '$lastname', '$email', '$password', NOW())");
         
         if(!$Adduser){
             $response['status'] = 'error';
