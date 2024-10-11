@@ -120,7 +120,7 @@
                   $('input[name="lastname"]').val('');
                   $('input[name="email"]').val('');
                   $('input[name="password"]').val('');
-              
+
               }
             }
             });
@@ -154,7 +154,13 @@
             icon: response.status === 'success' ? 'success' : 'error',
             title: response.message,
             showConfirmButton: true
-        });
+        }).then((result) => {
+            if (result.isConfirmed) {
+              if (response.status === 'success') {
+                window.location.href = '../dashboard/index.php';
+              }
+            }
+          });
         },
         error: function(err) {
           Swal.fire({

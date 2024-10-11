@@ -76,14 +76,14 @@
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
               <li class="nav-item active">
-                <a href="#" class="nav-link" data-page="assets/inc/home.php">
+                <a href="#" class="nav-link" id="link-dashboard" data-page="assets/inc/home.php">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link" data-page="assets/inc/quiz.php">
-                  <i class="fas fa-home"></i>
+                <a href="#" class="nav-link" id="link-quiz" data-page="assets/inc/quiz.php">
+                  <i class="fas fa-question"></i>
                   <p>Quiz</p>
                 </a>
               </li>
@@ -160,7 +160,7 @@
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
+                      <span class="fw-bold">user_name</span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -175,11 +175,11 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <p class="text-muted">hello@example.com</p>
+                            <h4>user_name</h4>
+                            <p class="text-muted">user_mail</p>
                             <a
-                              href="profile.html"
-                              class="btn btn-xs btn-secondary btn-sm"
+                              href="#"
+                              class="btn btn-xs btn-secondary btn-sm" data-page="assets/inc/profile.php"
                               >View Profile</a
                             >
                           </div>
@@ -187,9 +187,9 @@
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="#" data-page="assets/inc/profile.php" >My Profile</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Account Setting</a>
+                        <a class="dropdown-item" href="#" data-page="assets/inc/editprofile.php">Account Setting</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Logout</a>
                       </li>
