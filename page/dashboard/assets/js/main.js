@@ -15,9 +15,44 @@ function replaceText(oldText, newText) {
     }).text(newText); // เปลี่ยนข้อความ
 }
 
+function loadPage(page) {
+    $('#content-show').fadeOut(500, function() {
+        $.get(page, function(data) {
+            $('#content-show').html(data);
+            $('#content-show').fadeIn(500);
+
+            //เอาชื่อ page มาใส่ ใน url แยกมาเฉาพะชื่ออย่างเดียวไม่ต้องเอาpathและนามสกุลมา
+            const url = page.split('/').pop().split('.').shift();
+            window.history.pushState('', '', '?data-page=' + url);
+
+        }).fail(function() {
+            $('#content-show').html('<h1>ไม่สามารถโหลดหน้าได้</h1>').fadeIn(500);
+        });
+    });
+}
+
+
+
+//load page from url
+$(document).ready(function() {
+
+    //get url parameter ?data-page=page
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('data-page');
+
+    //add assets/inc/page if page is not null
+    if (page) {
+        loadPage('assets/inc/' + page + '.php');
+    }
+
+    console.log(page);
+
+});
+
 
 //load interface
 $(document).ready(function() {
+
 
     replaceText('user_name', getCookie('user_name'));
     replaceText('user_mail', getCookie('user_mail'));
@@ -27,25 +62,17 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     // โหลดหน้าแรกเมื่อเปิดเว็บ
-    loadPage('assets/inc/home.php');
-
-    // ฟังก์ชันสำหรับโหลดหน้า
-    function loadPage(page) {
-        $('#content-show').fadeOut(500, function() {
-            $.get(page, function(data) {
-                $('#content-show').html(data);
-                $('#content-show').fadeIn(500);
-            }).fail(function() {
-                $('#content-show').html('<h1>ไม่สามารถโหลดหน้าได้</h1>').fadeIn(500);
-            });
-        });
-    }
+    //loadPage('assets/inc/home.php');
 
     //when click tag a if attribute data-page is not null
     $(document).on('click', 'a', function() {
         const page = $(this).data('page');
         if (page) {
+
+
             loadPage(page);
+
+            
         }
     });
 
