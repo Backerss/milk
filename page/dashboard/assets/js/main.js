@@ -33,6 +33,8 @@ function loadPage(page) {
 
 
 
+
+
 //load page from url
 $(document).ready(function() {
 

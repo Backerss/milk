@@ -1,0 +1,10 @@
+[
+    {
+        "question": "Which country is singer Kyary Pamyu Pamyu from?",
+        "options": ["Vietnam", "Japan", "China", "South Korea"]
+    },
+    {
+        "question": "What is the capital of Japan?",
+        "options": ["Seoul", "Tokyo", "Beijing", "Bangkok"]
+    }
+]

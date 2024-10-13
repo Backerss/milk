@@ -1,0 +1,52 @@
+.quiz-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #d81b60;
+}
+
+.introduction {
+    margin-bottom: 20px;
+}
+
+.introduction p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.question-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block; /* ทำให้ตัวเลือกแต่ละตัวอยู่แยกกัน */
+    margin: 5px 0; /* เพิ่มระยะห่างระหว่างตัวเลือก */
+}
+
+button {
+    background-color: #d81b60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* เพิ่มการเปลี่ยนสีเมื่อมีการโฮเวอร์ */
+}
+
+button:hover {
+    background-color: #c51162; /* เปลี่ยนสีเมื่อโฮเวอร์ */
+}
+
+.question, .options, #nextBtn {
+    display: none; /* ซ่อนส่วนนี้เริ่มต้น */
+}
