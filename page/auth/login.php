@@ -157,7 +157,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
               if (response.status === 'success') {
-                window.location.href = '../dashboard/index.php';
+                window.location.href = '../dashboard/index.php?data-page=home';
               }
             }
           });

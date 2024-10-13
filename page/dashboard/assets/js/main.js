@@ -45,20 +45,31 @@ $(document).ready(function() {
         loadPage('assets/inc/' + page + '.php');
     }
 
-    console.log(page);
 
 });
 
 
-//load interface
-$(document).ready(function() {
+//when click logout-btn
+$(document).on('click', '#logout-btn', function() {
 
-
-    replaceText('user_name', getCookie('user_name'));
-    replaceText('user_mail', getCookie('user_mail'));
-
-    console.log(getCookie('user_mail'));
+    Swal.fire({
+        title: 'คุณต้องการออกจากระบบหรือไม่?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            //delete cookie
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            //redirect to login page
+            window.location.href = '../auth/login.php';
+        }
+    });
 });
+
 
 $(document).ready(function() {
     // โหลดหน้าแรกเมื่อเปิดเว็บ

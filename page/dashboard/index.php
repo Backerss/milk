@@ -162,14 +162,14 @@
                   >
                     <div class="avatar-sm">
                       <img
-                        src="assets/img/profile.jpg"
+                        src="assets/img/user.png"
                         alt="..."
                         class="avatar-img rounded-circle"
                       />
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">user_name</span>
+                      <span class="fw-bold"><?php echo  $_SESSION['user_data']['user_name']; ?></span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -178,14 +178,14 @@
                         <div class="user-box">
                           <div class="avatar-lg">
                             <img
-                              src="assets/img/profile.jpg"
+                              src="assets/img/user.png"
                               alt="image profile"
                               class="avatar-img rounded"
                             />
                           </div>
                           <div class="u-text">
-                            <h4>user_name</h4>
-                            <p class="text-muted">user_mail</p>
+                            <h4><?php echo $_SESSION["user_data"]["user_prefix"]," ", $_SESSION["user_data"]["user_name"], " ", $_SESSION["user_data"]["user_lastname"]; ?></h4>
+                            <p class="text-muted"><?php echo $_SESSION["user_data"]["user_mail"]; ?></p>
                             <a
                               href="#"
                               class="btn btn-xs btn-secondary btn-sm" data-page="assets/inc/profile.php"
@@ -200,7 +200,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" data-page="assets/inc/editprofile.php">Account Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" id="logout-btn" href="#">Logout</a>
                       </li>
                     </div>
                   </ul>
@@ -478,7 +478,7 @@
     <script src="assets/js/plugin/jsvectormap/world.js"></script>
 
     <!-- Sweet Alert -->
-    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Kaiadmin JS -->
     <script src="assets/js/kaiadmin.min.js"></script>

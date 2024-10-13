@@ -32,5 +32,18 @@ function selectData($conn, $sqlSelect) {
 }
 
 
+//function getRankNameById($conn, $rank_id)
+function getRankNameById($conn, $rank_id)
+{
+    $sql = "SELECT * FROM ranks WHERE ranks_id = '$rank_id'";
+    $result = selectData($conn, $sql);
+    if($result && $result->num_rows > 0){
+        $rank = $result->fetch_assoc();
+        return $rank['ranks_name'];
+    }
+    return null;
+}
+
+
 
 ?>
