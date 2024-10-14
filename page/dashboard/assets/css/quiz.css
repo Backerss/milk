@@ -29,9 +29,23 @@ h1 {
 }
 
 label {
-    display: block; /* ทำให้ตัวเลือกแต่ละตัวอยู่แยกกัน */
-    margin: 5px 0; /* เพิ่มระยะห่างระหว่างตัวเลือก */
+    display: block;
+    padding: 10px;
+    border: 2px solid #d81b60; /* เพิ่มกรอบรอบตัวเลือก */
+    border-radius: 5px; /* มุมโค้งของกรอบ */
+    cursor: pointer; /* เปลี่ยนให้เป็น pointer เมื่อ hover */
+    transition: background-color 0.3s, color 0.3s;
+    text-align: left;
 }
+
+label:hover {
+    background-color: #f8bbd0; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+}
+
+input[type="radio"] {
+    display: none; /* ซ่อน radio button ออกไป */
+}
+
 
 button {
     background-color: #d81b60;
