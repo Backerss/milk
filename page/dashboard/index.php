@@ -21,6 +21,8 @@
       href="assets/img/kaiadmin/favicon.ico"
       type="image/x-icon"
     />
+    <link rel="stylesheet" href="assets/css/quiz.css">
+
 
     <!-- Fonts and icons -->
     <script src="assets/js/plugin/webfont/webfont.min.js"></script>
@@ -486,5 +488,6 @@
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="assets/js/setting-demo.js"></script>
     <script src="assets/js/main.js"></script>
+
   </body>
 </html>

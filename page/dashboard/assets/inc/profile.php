@@ -37,7 +37,7 @@ if($checkupdate && $checkupdate->num_rows > 0){
             <div class="d-flex flex-column align-items-center text-center">
               <img src="assets/img/user.png" alt="Admin" class="rounded-circle" width="150">
               <div class="mt-3">
-                <h4><?php echo $_SESSION["user_name"], " ", $_SESSION["user_lastname"]; ?></h4>
+                <h4><?php echo $_SESSION["user_data"]["user_name"], " ", $_SESSION["user_data"]["user_lastname"]; ?></h4>
                 <p class="text-secondary mb-1"><?php echo $rankName; ?></p>
                 <p class="text-muted font-size-sm"><?php if(isset($_SESSION["user_data"]["user_add"])) echo $_SESSION["user_data"]["user_add"]; else echo "No address"; ?></p>
               </div>

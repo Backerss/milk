@@ -1,3 +1,13 @@
+
+// ประกาศตัวแปร QUIZ
+let questions = []; // เก็บคำถามจากไฟล์ JSON
+let currentQuestionIndex = 0; // ดัชนีของคำถามปัจจุบัน
+let userAnswers = []; // เก็บคำตอบของผู้ใช้
+let isQuestionsLoaded = false;
+// ประกาศตัวแปร QUIZ
+
+
+
 //get cookie by name
 function getCookie(name) {
     const value = `; ${document.cookie}`; // เริ่มต้นด้วย ; เพื่อให้การค้นหามีความแม่นยำมากขึ้น
@@ -81,11 +91,7 @@ $(document).ready(function() {
     $(document).on('click', 'a', function() {
         const page = $(this).data('page');
         if (page) {
-
-
-            loadPage(page);
-
-            
+            loadPage(page); 
         }
     });
 

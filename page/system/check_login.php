@@ -38,6 +38,7 @@
     
             // เก็บข้อมูลใน session
             $_SESSION['user_data'] = $userData;
+            $_SESSION['user_id'] = $hashUser['users_id'];
 
 
             //set cookie
