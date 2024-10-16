@@ -28,7 +28,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-label {
+.options label {
     display: block;
     padding: 10px;
     border: 2px solid #d81b60; /* เพิ่มกรอบรอบตัวเลือก */
@@ -38,11 +38,11 @@ label {
     text-align: left;
 }
 
-label:hover {
+.options label:hover {
     background-color: #f8bbd0; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
 }
 
-input[type="radio"] {
+.options input[type="radio"] {
     display: none; /* ซ่อน radio button ออกไป */
 }
 

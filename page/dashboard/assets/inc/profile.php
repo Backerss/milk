@@ -102,9 +102,20 @@ if($checkupdate && $checkupdate->num_rows > 0){
               </div>
             </div>
             <hr>
+            <?php if($_SESSION["user_data"]["users_rank"] == 2){ ?>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Register Date</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <?php if(isset($_SESSION["user_data"]["users_regis"])) echo $_SESSION["user_data"]["users_regis"]; else echo "N/A"; ?>
+              </div>
+            </div>
+            <hr>
+            <?php } ?>
             <div class="row">
               <div class="col-sm-12">
-                <a class="btn btn-info"href="#">Edit</a>
+                <a class="btn btn-info"href="#" data-bs-toggle="modal" data-bs-target="#editprofile">Edit</a>
               </div>
             </div>
           </div>
@@ -113,4 +124,145 @@ if($checkupdate && $checkupdate->num_rows > 0){
     </div>
 
   </div>
+  
+
+  <div class="modal fade" id="editprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">แก้ไขโปรไฟล์</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="prefix" class="col-form-label">Prefix:</label>
+                <select class="form-select" id="prefix" name="prefix">
+                  <option value="นาย" <?php if($_SESSION["user_data"]["user_prefix"] == "นาย") echo "selected"; ?>>นาย</option>
+                  <option value="นางสาว" <?php if($_SESSION["user_data"]["user_prefix"] == "นางสาว") echo "selected"; ?>>นางสาว</option>
+                  <option value="นาง" <?php if($_SESSION["user_data"]["user_prefix"] == "นาง") echo "selected"; ?>>นาง</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION["user_data"]["user_name"]; ?>">
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="lastname" class="col-form-label">Lastname:</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $_SESSION["user_data"]["user_lastname"]; ?>">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="lastname" class="col-form-label">Birthday:</label>
+                <input type="date" class="form-control" id="birthday" name="birthday" value="<?php echo $_SESSION["user_data"]["user_date"]; ?>">
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="phone" class="col-form-label">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $_SESSION["user_data"]["user_phone"]; ?>">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="address" class="col-form-label">Student Code:</label>
+                <input type="text" class="form-control" id="code" name="code" value="<?php if(isset($_SESSION["user_data"]["users_code"])) echo $_SESSION["user_data"]["users_code"]; ?>">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="mb-3">
+                <label for="address" class="col-form-label">Address:</label>
+                <textarea class="form-control" id="address" name="address"><?php if(isset($_SESSION["user_data"]["user_add"])) echo $_SESSION["user_data"]["user_add"]; ?></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="password" class="col-form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password">
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="mb-3">
+                <label for="repassword" class="col-form-label">Re-Password:</label>
+                <input type="password" class="form-control" id="repassword" name="repassword">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" id="submit-edit-profile" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<script>
+  $(document).ready(function(){
+    $("#submit-edit-profile").click(function(){
+
+      var prefix = $("#prefix").val();
+      var name = $("#name").val();
+      var lastname = $("#lastname").val();
+      var birthday = $("#birthday").val();
+      var phone = $("#phone").val();
+      var code = $("#code").val();
+      var address = $("#address").val();
+      var password = $("#password").val();
+      var repassword = $("#repassword").val();
+      if(password != repassword){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Password not match',
+        });
+        return;
+      }
+      $.ajax({
+        url: "assets/inc/system_editprofile.php",
+        type: "POST",
+        data: {
+          user_id: <?php echo $_SESSION["user_data"]["user_id"]; ?>,
+          prefix: prefix,
+          name: name,
+          lastname: lastname,
+          birthday: birthday,
+          phone: phone,
+          code: code,
+          address: address,
+          password: password
+        },
+        success: function(response){
+          var data = JSON.parse(response);
+          Swal.fire({
+            icon: data.status === 'success' ? 'success' : 'error',
+            title: data.message,
+            showConfirmButton: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              if (data.status === 'success') {
+                location.reload();
+              }
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
