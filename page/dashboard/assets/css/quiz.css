@@ -38,14 +38,6 @@ h1 {
     text-align: left;
 }
 
-.options label:hover {
-    background-color: #f8bbd0; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
-}
-
-.options input[type="radio"] {
-    display: none; /* ซ่อน radio button ออกไป */
-}
-
 
 button {
     background-color: #d81b60;
